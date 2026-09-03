@@ -1,0 +1,106 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: API-GATEWAY
+  cloud:
+    gateway:
+      globalcors:
+        cors-configurations:
+          '[/**]':
+            allowedOriginPatterns:
+              - http://localhost:3000
+              - http://127.0.0.1:3000
+            allowedMethods:
+              - GET
+              - POST
+              - PUT
+              - PATCH
+              - DELETE
+              - OPTIONS
+            allowedHeaders: "*"
+            exposedHeaders:
+              - Authorization
+            allowCredentials: true
+      default-filters:
+        - DedupeResponseHeader=Access-Control-Allow-Credentials Access-Control-Allow-Origin
+      routes:
+        - id: user-auth
+          uri: lb://USER-SERVICE
+          predicates:
+            - Path=/api/auth/**
+        - id: user-users
+          uri: lb://USER-SERVICE
+          predicates:
+            - Path=/api/users/**
+        - id: flights
+          uri: lb://FLIGHT-SERVICE
+          predicates:
+            - Path=/api/flights/**
+        - id: hotels
+          uri: lb://HOTEL-SERVICE
+          predicates:
+            - Path=/api/hotels/**
+        - id: ai
+          uri: lb://AI-PLANNER-SERVICE
+          predicates:
+            - Path=/api/ai/**
+        - id: trips
+          uri: lb://TRIP-SERVICE
+          predicates:
+            - Path=/api/trips/**
+        - id: user-docs
+          uri: lb://USER-SERVICE
+          predicates:
+            - Path=/v3/api-docs/user
+          filters:
+            - SetPath=/v3/api-docs
+        - id: flight-docs
+          uri: lb://FLIGHT-SERVICE
+          predicates:
+            - Path=/v3/api-docs/flights
+          filters:
+            - SetPath=/v3/api-docs
+        - id: hotel-docs
+          uri: lb://HOTEL-SERVICE
+          predicates:
+            - Path=/v3/api-docs/hotels
+          filters:
+            - SetPath=/v3/api-docs
+        - id: ai-docs
+          uri: lb://AI-PLANNER-SERVICE
+          predicates:
+            - Path=/v3/api-docs/ai
+          filters:
+            - SetPath=/v3/api-docs
+        - id: trip-docs
+          uri: lb://TRIP-SERVICE
+          predicates:
+            - Path=/v3/api-docs/trips
+          filters:
+            - SetPath=/v3/api-docs
+
+eureka:
+  client:
+    service-url:
+      defaultZone: ${EUREKA_URL:http://localhost:8761/eureka/}
+  instance:
+    prefer-ip-address: true
+
+springdoc:
+  swagger-ui:
+    path: /swagger-ui.html
+    urls:
+      - name: User Service
+        url: /v3/api-docs/user
+      - name: Flight Service
+        url: /v3/api-docs/flights
+      - name: Hotel Service
+        url: /v3/api-docs/hotels
+      - name: AI Planner Service
+        url: /v3/api-docs/ai
+      - name: Trip Service
+        url: /v3/api-docs/trips
+  api-docs:
+    path: /v3/api-docs

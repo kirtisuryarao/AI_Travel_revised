@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign in — TravelAI</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="auth-page">
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="/" class="nav-brand">
+                <span class="logo">✈️</span>
+                <span class="brand-text">TravelAI</span>
+            </a>
+            <div class="nav-actions">
+                <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">🌙</button>
+            </div>
+        </div>
+    </nav>
+
+    <main class="auth-shell">
+        <section class="auth-card">
+            <p class="auth-eyebrow">Account</p>
+            <h1>Welcome back</h1>
+            <p class="auth-subtitle">Sign in to place orders and track your travel gear.</p>
+
+            <div class="auth-tabs">
+                <button type="button" class="auth-tab active" data-tab="login">Sign in</button>
+                <button type="button" class="auth-tab" data-tab="register">Create account</button>
+            </div>
+
+            <form id="loginForm" class="auth-form">
+                <label>Email
+                    <input type="email" name="email" required placeholder="you@example.com">
+                </label>
+                <label>Password
+                    <input type="password" name="password" required placeholder="••••••••">
+                </label>
+                <button type="submit" class="cta-button full-width">Sign in</button>
+            </form>
+
+            <form id="registerForm" class="auth-form hidden">
+                <label>Full name
+                    <input type="text" name="fullName" required placeholder="Alex Rivera">
+                </label>
+                <label>Email
+                    <input type="email" name="email" required placeholder="you@example.com">
+                </label>
+                <label>Password
+                    <input type="password" name="password" required minlength="6" placeholder="At least 6 characters">
+                </label>
+                <button type="submit" class="cta-button full-width">Create account</button>
+            </form>
+
+            <p id="authMessage" class="auth-message" role="status"></p>
+
+            <div class="auth-demo">
+                <p>Demo accounts</p>
+                <code>demo@travelai.com / demo123</code>
+                <code>admin@travelai.com / admin123</code>
+            </div>
+        </section>
+    </main>
+
+    <script src="auth.js"></script>
+    <script src="login.js"></script>
+</body>
+</html>

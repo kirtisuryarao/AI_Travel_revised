@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Itinerary — TravelAI</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>✈️</text></svg>">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="itinerary.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body class="itinerary-page">
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="/" class="nav-brand">
+                <span class="logo">✈️</span>
+                <span class="brand-text">TravelAI</span>
+            </a>
+            <div class="nav-actions">
+                <a href="/my-trips.html" class="nav-link">My trips</a>
+                <a href="/products.html" class="nav-link">Shop</a>
+                <div id="navAuth"></div>
+                <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">🌙</button>
+                <a href="/" class="back-button">← Planner</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="it-wrap">
+        <!-- Hero -->
+        <header class="it-hero">
+            <div class="it-hero-text">
+                <p class="it-kicker">Your itinerary</p>
+                <h1 id="heroDestination">Destination</h1>
+                <p id="heroMeta" class="it-subtitle">Plan details will appear here</p>
+
+                <div class="it-stats">
+                    <div class="it-stat">
+                        <span class="it-stat-label">Weather</span>
+                        <strong id="factWeather">—</strong>
+                    </div>
+                    <div class="it-stat">
+                        <span class="it-stat-label">Duration</span>
+                        <strong id="factDuration">—</strong>
+                    </div>
+                    <div class="it-stat">
+                        <span class="it-stat-label">Budget</span>
+                        <strong id="factBudget">—</strong>
+                    </div>
+                    <div class="it-stat">
+                        <span class="it-stat-label">Interests</span>
+                        <strong id="factInterests">—</strong>
+                    </div>
+                </div>
+
+                <div class="it-actions">
+                    <button id="saveTripBtn" class="cta-button">Save trip</button>
+                    <button id="exportPdfBtn" class="secondary-btn">Download PDF</button>
+                    <span id="saveStatus" class="it-save-msg"></span>
+                </div>
+            </div>
+
+            <div class="it-hero-media">
+                <div class="it-hero-frame">
+                    <img id="heroImage" src="" alt="" class="it-hero-img" hidden>
+                    <div id="heroPlaceholder" class="it-hero-placeholder">
+                        <span>Loading photos…</span>
+                    </div>
+                </div>
+                <div class="it-thumb-row" id="thumbRow"></div>
+            </div>
+        </header>
+
+        <!-- Body -->
+        <div class="it-body">
+            <section class="it-days">
+                <div class="it-section-head">
+                    <h2>Day-by-day plan</h2>
+                    <p>Your schedule, broken down by day</p>
+                </div>
+                <div id="itineraryContent" class="it-days-list">
+                    <div class="it-skeleton">
+                        <div class="skeleton-line"></div>
+                        <div class="skeleton-line"></div>
+                        <div class="skeleton-line short"></div>
+                    </div>
+                </div>
+            </section>
+
+            <aside class="it-aside">
+                <div class="it-card">
+                    <h3>Budget overview</h3>
+                    <div class="it-budget-rows">
+                        <div><span>Your budget</span><strong id="recEnteredBudget">—</strong></div>
+                        <div><span>Estimated spend</span><strong id="recEstimatedCost">—</strong></div>
+                        <div><span>With buffer</span><strong id="recRecommendedBudget">—</strong></div>
+                    </div>
+                    <p id="recComfortRating" class="it-comfort">Evaluating…</p>
+                    <div class="it-chart-wrap">
+                        <canvas id="budgetChart"></canvas>
+                    </div>
+                </div>
+
+                <div class="it-card">
+                    <div class="it-tabs">
+                        <button class="it-tab active" data-panel="panelFood">Food</button>
+                        <button class="it-tab" data-panel="panelStay">Stay</button>
+                        <button class="it-tab" data-panel="panelTips">Tips</button>
+                    </div>
+                    <div id="panelFood" class="it-tab-panel active">
+                        <div id="foodContent" class="it-prose muted">Loading…</div>
+                        <h4>Hidden spots</h4>
+                        <div id="hiddenGemsContent" class="it-prose muted">Loading…</div>
+                    </div>
+                    <div id="panelStay" class="it-tab-panel">
+                        <div id="accommodationContent" class="it-prose muted">Loading…</div>
+                        <h4>Getting around</h4>
+                        <div id="transportationContent" class="it-prose muted">Loading…</div>
+                    </div>
+                    <div id="panelTips" class="it-tab-panel">
+                        <h4>Packing</h4>
+                        <div id="packingContent" class="it-prose muted">Loading…</div>
+                        <h4>Safety</h4>
+                        <div id="emergencyContent" class="it-prose muted">Loading…</div>
+                    </div>
+                </div>
+            </aside>
+        </div>
+    </div>
+
+    <script src="auth.js"></script>
+    <script src="itinerary.js"></script>
+</body>
+</html>

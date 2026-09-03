@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Travel Shop — TravelAI</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="/" class="nav-brand">
+                <span class="logo">✈️</span>
+                <span class="brand-text">TravelAI</span>
+            </a>
+            <div class="nav-actions">
+                <a href="/" class="nav-link">Planner</a>
+                <div id="navAuth"></div>
+                <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">🌙</button>
+            </div>
+        </div>
+    </nav>
+
+    <main class="page-shell">
+        <header class="page-header">
+            <div>
+                <p class="page-eyebrow">Product service</p>
+                <h1>Travel essentials</h1>
+                <p class="page-subtitle">Browse gear and add items to your cart. Checkout creates an order in the order service.</p>
+            </div>
+            <button id="checkoutBtn" class="cta-button" disabled>Place order (0)</button>
+        </header>
+
+        <div id="productGrid" class="product-grid">
+            <p class="muted">Loading products…</p>
+        </div>
+    </main>
+
+    <script src="auth.js"></script>
+    <script src="products.js"></script>
+</body>
+</html>

@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Travel Planner - Plan Your Perfect Trip</title>
+    <meta name="description" content="Plan your perfect trip with AI-powered itineraries, real-time weather data, budget planning, and PDF export. Powered by LLaMA 3.3 70B.">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>✈️</text></svg>">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <span class="logo">✈️</span>
+                <span class="brand-text">TravelAI</span>
+            </div>
+            <div class="nav-actions">
+                <a href="/products.html" class="nav-link">Shop</a>
+                <div id="navAuth"></div>
+                <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+                    <span class="theme-icon">🌙</span>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <div class="hero-badge">✨ AI-Powered Travel Planning</div>
+            <h1 class="hero-title">Plan Your Perfect Trip with AI</h1>
+            <p class="hero-subtitle">Get personalized itineraries, weather insights, and budget planning powered by artificial intelligence</p>
+            <button class="cta-button" onclick="document.getElementById('planner-section').scrollIntoView({behavior: 'smooth'})">Start Planning</button>
+        </div>
+        <div class="hero-background"></div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features-section">
+        <div class="features-header">
+            <h2>Why Choose TravelAI?</h2>
+            <p>Everything you need for the perfect trip</p>
+        </div>
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">🤖</div>
+                <h3>AI Itinerary</h3>
+                <p>Get detailed day-by-day plans tailored to your interests</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🌤️</div>
+                <h3>Weather Intel</h3>
+                <p>Real-time weather data for your destination</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">💰</div>
+                <h3>Budget Planning</h3>
+                <p>Smart budget allocation for all travel expenses</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">📄</div>
+                <h3>PDF Export</h3>
+                <p>Save and share your itinerary in one click</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Planner Section -->
+    <section id="planner-section" class="planner-section">
+        <div class="planner-container">
+            <div class="planner-card" id="plannerCard">
+                <div class="card-header">
+                    <h2>Start Your Adventure</h2>
+                    <p>Tell us about your dream trip</p>
+                </div>
+                
+                <form id="travelForm" class="travel-form">
+                    <!-- Location Row -->
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="flyingFrom">Flying From</label>
+                            <input type="text" id="flyingFrom" placeholder="e.g. New York, JFK" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="destination">Flying To</label>
+                            <input type="text" id="destination" placeholder="e.g. Paris, CDG" required>
+                        </div>
+                    </div>
+
+                    <!-- Dates & Travelers Row -->
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Travel Dates</label>
+                            <div class="date-picker-group">
+                                <input type="date" id="startDate" required>
+                                <span>to</span>
+                                <input type="date" id="endDate" required>
+                            </div>
+                            <span class="form-help" id="durationDisplay">Select dates to calculate duration</span>
+                            <!-- Hidden input to keep compatibility with existing backend if needed -->
+                            <input type="hidden" id="duration" value=""> 
+                        </div>
+                        <div class="form-group">
+                            <label>Travelers</label>
+                            <div class="traveler-counter">
+                                <button type="button" class="counter-btn" onclick="updateTravelers(-1)">-</button>
+                                <span id="travelerCount">2</span>
+                                <button type="button" class="counter-btn" onclick="updateTravelers(1)">+</button>
+                            </div>
+                            <span class="form-help">Total people</span>
+                        </div>
+                    </div>
+
+                    <!-- Budget Input -->
+                    <div class="form-group">
+                        <label for="budgetInput">Estimated Maximum Budget (₹)</label>
+                        <input type="number" id="budgetInput" placeholder="e.g. 50000" min="1000" onblur="checkBudgetHeuristic()">
+                        <div id="budgetWarning" class="budget-warning" style="display: none;"></div>
+                        <!-- Hidden input to hold the actual value sent to backend, if we want to keep it named budget -->
+                        <input type="hidden" id="budget" value="">
+                    </div>
+
+                    <!-- Interests Chips -->
+                    <div class="form-group">
+                        <label>Your Interests</label>
+                        <div class="interests-container" id="interestsContainer">
+                            <button type="button" class="chip" onclick="toggleChip(this)">History</button>
+                            <button type="button" class="chip" onclick="toggleChip(this)">Food</button>
+                            <button type="button" class="chip" onclick="toggleChip(this)">Adventure</button>
+                            <button type="button" class="chip" onclick="toggleChip(this)">Nature</button>
+                            <button type="button" class="chip" onclick="toggleChip(this)">Culture</button>
+                            <button type="button" class="chip" onclick="toggleChip(this)">Relaxation</button>
+                            <button type="button" class="chip" onclick="toggleChip(this)">Nightlife</button>
+                            <button type="button" class="chip" onclick="toggleChip(this)">Shopping</button>
+                        </div>
+                        <input type="text" id="customInterest" placeholder="Add custom interest + Enter" onkeypress="addCustomChip(event)">
+                        <!-- Hidden input to hold comma separated interests for backend -->
+                        <input type="hidden" id="interests" value="">
+                    </div>
+
+                    <button type="button" id="planBtn" class="plan-button" onclick="generatePlan()">
+                        <span class="button-text">Generate Itinerary</span>
+                        <span class="button-icon">✈️</span>
+                    </button>
+                </form>
+
+                <!-- Premium Loading Screen -->
+                <div id="loading" class="premium-loading" style="display: none;">
+                    <div class="loading-airplane-container">
+                        <div class="loading-airplane">✈️</div>
+                        <div class="flight-path"></div>
+                    </div>
+                    
+                    <h3 class="loading-title">Crafting Your Journey...</h3>
+                    <div class="loading-messages" id="loadingMessages">
+                        Analyzing best flight routes...
+                    </div>
+                    
+                    <div class="progress-bar-container">
+                        <div class="progress-bar" id="progressBar"></div>
+                    </div>
+                    <p class="estimated-time">Estimated completion: <span id="estTime">15s</span></p>
+
+                    <div class="travel-fact-card">
+                        <div class="fact-icon">💡</div>
+                        <div class="fact-content">
+                            <h4>Did you know?</h4>
+                            <p id="travelFact">France is the most visited country in the world.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Results Section -->
+    <section id="results" class="results-section" style="display: none;">
+        <div class="results-container">
+            <div class="results-header">
+                <h2>Your Personalized Itinerary</h2>
+                <button class="close-results" onclick="document.getElementById('results').style.display='none'">✕</button>
+            </div>
+
+            <div class="results-content">
+                <div id="weatherCard" class="weather-card-result"></div>
+                
+                <div class="itinerary-card">
+                    <div class="itinerary-header">
+                        <h3>📋 Your Trip Details</h3>
+                    </div>
+                    <div id="itineraryOutput" class="itinerary-output"></div>
+                </div>
+
+                <div class="export-section">
+                    <button id="exportBtn" class="export-button" onclick="exportPDF()">
+                        <span>📄 Export as PDF</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>&copy; 2026 TravelAI. Plan smarter, travel better.</p>
+    </footer>
+
+    <script src="auth.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>

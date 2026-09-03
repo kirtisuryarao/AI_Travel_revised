@@ -1,0 +1,3 @@
+spring.application.name=travel-planner
+groq.api.key=YOUR_GROQ_API_KEY_HERE
+server.port=8081

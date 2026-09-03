@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Trips — TravelAI</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="/" class="nav-brand">
+                <span class="logo">✈️</span>
+                <span class="brand-text">TravelAI</span>
+            </a>
+            <div class="nav-actions">
+                <a href="/" class="nav-link">Planner</a>
+                <a href="/products.html" class="nav-link">Shop</a>
+                <div id="navAuth"></div>
+                <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">🌙</button>
+            </div>
+        </div>
+    </nav>
+
+    <main class="page-shell">
+        <header class="page-header">
+            <div>
+                <p class="page-eyebrow">Saved itineraries</p>
+                <h1>My trips</h1>
+                <p class="page-subtitle">Every itinerary you save is stored to your account.</p>
+            </div>
+            <a href="/" class="cta-button">Plan a new trip</a>
+        </header>
+
+        <div id="tripsList" class="trips-grid">
+            <p class="muted">Loading your trips…</p>
+        </div>
+    </main>
+
+    <script src="auth.js"></script>
+    <script src="my-trips.js"></script>
+</body>
+</html>

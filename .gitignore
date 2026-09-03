@@ -1,0 +1,8 @@
+**/target/
+**/.idea/
+frontend/node_modules/
+frontend/.next/
+**/data/*.mv.db
+**/data/*.trace.db
+**/.env
+frontend/.env.local
