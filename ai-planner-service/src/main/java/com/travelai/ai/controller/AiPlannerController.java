@@ -34,7 +34,7 @@ public class AiPlannerController {
         return ResponseEntity.ok(itineraryService.generate(request));
     }
 
-    @GetMapping("/health")
+    @GetMapping({"/health", "/health/"})
     public ResponseEntity<HealthResponse> health() {
         boolean ready = groqService.isConfigured();
         return ResponseEntity.ok(new HealthResponse(

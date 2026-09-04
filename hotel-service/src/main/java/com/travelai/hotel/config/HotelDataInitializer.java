@@ -16,10 +16,8 @@ public class HotelDataInitializer {
     @Bean
     CommandLineRunner seedHotels(HotelRepository hotelRepository) {
         return args -> {
-            if (hotelRepository.count() > 0) {
-                return;
-            }
-            hotelRepository.saveAll(List.of(
+            if (hotelRepository.count() == 0) {
+                hotelRepository.saveAll(List.of(
                 new Hotel("H-101", "Calangute Beach Hotel", 4.3, "Calangute, Goa", "GOI", "Goa", "Deluxe Room",
                     "WiFi,Pool,Breakfast,Beach access", new BigDecimal("4200"), "INR",
                     "https://images.unsplash.com/photo-1566073771259-6a8506099945?w=800"),
@@ -56,7 +54,24 @@ public class HotelDataInitializer {
                 new Hotel("H-701", "South Bank View Hotel", 4.2, "South Bank, London", "LHR", "London", "Deluxe Room",
                     "WiFi,Breakfast,River view", new BigDecimal("19500"), "INR",
                     "https://images.unsplash.com/photo-1486299267070-83823f5448dd?w=800")
-            ));
+                ));
+            }
+            List.of(
+                new Hotel("H-801", "Lake Pichola Budget Stay", 3.9, "Lal Ghat, Udaipur", "UDR", "Udaipur", "Standard Room",
+                    "WiFi,Breakfast,City view", new BigDecimal("1800"), "INR",
+                    "https://images.unsplash.com/photo-1599661046289-e31897846e41?w=800"),
+                new Hotel("H-802", "Old City Haveli", 4.2, "Hathi Pol, Udaipur", "UDR", "Udaipur", "Heritage Room",
+                    "WiFi,Restaurant,Courtyard", new BigDecimal("3500"), "INR",
+                    "https://images.unsplash.com/photo-1602643163986-5d7b7f1a5d4c?w=800"),
+                new Hotel("H-803", "Fateh Sagar Retreat", 4.5, "Fateh Sagar, Udaipur", "UDR", "Udaipur", "Lake View Room",
+                    "WiFi,Pool,Breakfast,Lake view", new BigDecimal("7500"), "INR",
+                    "https://images.unsplash.com/photo-1548013146-72479768bada?w=800"),
+                new Hotel("H-804", "Aravalli Palace Resort", 4.7, "Ranakpur Road, Udaipur", "UDR", "Udaipur", "Royal Suite",
+                    "WiFi,Pool,Spa,Breakfast,Concierge", new BigDecimal("14500"), "INR",
+                    "https://images.unsplash.com/photo-1582610116397-edb318620f90?w=800")
+            ).stream()
+                .filter(hotel -> hotelRepository.findByHotelId(hotel.getHotelId()).isEmpty())
+                .forEach(hotelRepository::save);
         };
     }
 }

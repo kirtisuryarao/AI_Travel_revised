@@ -106,7 +106,7 @@ public class ItineraryService {
             Selected flight: %s %s priced %s
             Selected hotel: %s priced %s per night
             Weather: %s
-            Return JSON only. Use the provided flight and hotel prices in the budget. Do not invent different flight or hotel names.
+            Return JSON only. Include the destination's most famous landmarks, viewpoints, local food areas, and one less-crowded local experience across the itinerary. Match activities to the interests and dates. Use the provided flight and hotel prices in the budget. Do not invent different flight or hotel names.
             """.formatted(
                 origin,
                 destination,

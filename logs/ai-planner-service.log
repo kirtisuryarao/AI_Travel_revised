@@ -1,0 +1,103 @@
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] ------------------< com.travelai:ai-planner-service >-------------------
+[INFO] Building ai-planner-service 1.0.0-SNAPSHOT
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] >>> spring-boot:3.3.0:run (default-cli) > test-compile @ ai-planner-service >>>
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ ai-planner-service ---
+[INFO] Copying 1 resource from src/main/resources to target/classes
+[INFO] Copying 0 resource from src/main/resources to target/classes
+[INFO] 
+[INFO] --- compiler:3.13.0:compile (default-compile) @ ai-planner-service ---
+[INFO] Nothing to compile - all classes are up to date.
+[INFO] 
+[INFO] --- resources:3.3.1:testResources (default-testResources) @ ai-planner-service ---
+[INFO] skip non existing resourceDirectory /Users/diya/Desktop/AI_Travel_revised/ai-planner-service/src/test/resources
+[INFO] 
+[INFO] --- compiler:3.13.0:testCompile (default-testCompile) @ ai-planner-service ---
+[INFO] Nothing to compile - all classes are up to date.
+[INFO] 
+[INFO] <<< spring-boot:3.3.0:run (default-cli) < test-compile @ ai-planner-service <<<
+[INFO] 
+[INFO] 
+[INFO] --- spring-boot:3.3.0:run (default-cli) @ ai-planner-service ---
+[INFO] Attaching agents: []
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+
+ :: Spring Boot ::                (v3.3.0)
+
+2026-09-04T00:53:57.069+05:30  INFO 17745 --- [AI-PLANNER-SERVICE] [           main] c.t.ai.AiPlannerServiceApplication       : Starting AiPlannerServiceApplication using Java 25.0.1 with PID 17745 (/Users/diya/Desktop/AI_Travel_revised/ai-planner-service/target/classes started by diya in /Users/diya/Desktop/AI_Travel_revised/ai-planner-service)
+2026-09-04T00:53:57.078+05:30  INFO 17745 --- [AI-PLANNER-SERVICE] [           main] c.t.ai.AiPlannerServiceApplication       : No active profile set, falling back to 1 default profile: "default"
+2026-09-04T00:53:58.875+05:30  INFO 17745 --- [AI-PLANNER-SERVICE] [           main] o.s.cloud.context.scope.GenericScope     : BeanFactory id=f92d1e18-abe7-3d88-b015-5e80cab5fe20
+2026-09-04T00:53:58.978+05:30  WARN 17745 --- [AI-PLANNER-SERVICE] [           main] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.cloud.client.loadbalancer.LoadBalancerAutoConfiguration$DeferringLoadBalancerInterceptorConfig' of type [org.springframework.cloud.client.loadbalancer.LoadBalancerAutoConfiguration$DeferringLoadBalancerInterceptorConfig] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying). The currently created BeanPostProcessor [lbRestClientPostProcessor] is declared through a non-static factory method on that class; consider declaring it as static instead.
+2026-09-04T00:53:58.982+05:30  WARN 17745 --- [AI-PLANNER-SERVICE] [           main] trationDelegate$BeanPostProcessorChecker : Bean 'deferringLoadBalancerInterceptor' of type [org.springframework.cloud.client.loadbalancer.DeferringLoadBalancerInterceptor] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying). Is this bean getting eagerly injected into a currently created BeanPostProcessor [lbRestClientPostProcessor]? Check the corresponding BeanPostProcessor declaration and its dependencies.
+WARNING: A restricted method in java.lang.System has been called
+WARNING: java.lang.System::load has been called by org.apache.tomcat.jni.Library in an unnamed module (file:/Users/diya/.m2/repository/org/apache/tomcat/embed/tomcat-embed-core/10.1.24/tomcat-embed-core-10.1.24.jar)
+WARNING: Use --enable-native-access=ALL-UNNAMED to avoid a warning for callers in this module
+WARNING: Restricted methods will be blocked in a future release unless native access is enabled
+
+2026-09-04T00:53:59.427+05:30  INFO 17745 --- [AI-PLANNER-SERVICE] [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8084 (http)
+2026-09-04T00:53:59.441+05:30  INFO 17745 --- [AI-PLANNER-SERVICE] [           main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2026-09-04T00:53:59.441+05:30  INFO 17745 --- [AI-PLANNER-SERVICE] [           main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.24]
+2026-09-04T00:53:59.526+05:30  INFO 17745 --- [AI-PLANNER-SERVICE] [           main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2026-09-04T00:53:59.527+05:30  INFO 17745 --- [AI-PLANNER-SERVICE] [           main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 2320 ms
+2026-09-04T00:53:59.619+05:30  WARN 17745 --- [AI-PLANNER-SERVICE] [           main] com.travelai.ai.service.GroqService      : GROQ_API_KEY is not configured. AI itinerary generation will return 503 until a key is set.
+2026-09-04T00:54:00.725+05:30  INFO 17745 --- [AI-PLANNER-SERVICE] [           main] DiscoveryClientOptionalArgsConfiguration : Eureka HTTP Client uses RestTemplate.
+2026-09-04T00:54:00.799+05:30  WARN 17745 --- [AI-PLANNER-SERVICE] [           main] iguration$LoadBalancerCaffeineWarnLogger : Spring Cloud LoadBalancer is currently working with the default cache. While this cache implementation is useful for development and tests, it's recommended to use Caffeine cache in production.You can switch to using Caffeine cache, by adding it and org.springframework.cache.caffeine.CaffeineCacheManager to the classpath.
+2026-09-04T00:54:00.836+05:30  INFO 17745 --- [AI-PLANNER-SERVICE] [           main] o.s.c.n.eureka.InstanceInfoFactory       : Setting initial instance status as: STARTING
+2026-09-04T00:54:00.871+05:30  INFO 17745 --- [AI-PLANNER-SERVICE] [           main] com.netflix.discovery.DiscoveryClient    : Initializing Eureka in region us-east-1
+2026-09-04T00:54:00.879+05:30  INFO 17745 --- [AI-PLANNER-SERVICE] [           main] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
+2026-09-04T00:54:00.891+05:30  INFO 17745 --- [AI-PLANNER-SERVICE] [           main] com.netflix.discovery.DiscoveryClient    : Disable delta property : false
+2026-09-04T00:54:00.891+05:30  INFO 17745 --- [AI-PLANNER-SERVICE] [           main] com.netflix.discovery.DiscoveryClient    : Single vip registry refresh property : null
+2026-09-04T00:54:00.891+05:30  INFO 17745 --- [AI-PLANNER-SERVICE] [           main] com.netflix.discovery.DiscoveryClient    : Force full registry fetch : false
+2026-09-04T00:54:00.891+05:30  INFO 17745 --- [AI-PLANNER-SERVICE] [           main] com.netflix.discovery.DiscoveryClient    : Application is null : false
+2026-09-04T00:54:00.891+05:30  INFO 17745 --- [AI-PLANNER-SERVICE] [           main] com.netflix.discovery.DiscoveryClient    : Registered Applications size is zero : true
+2026-09-04T00:54:00.891+05:30  INFO 17745 --- [AI-PLANNER-SERVICE] [           main] com.netflix.discovery.DiscoveryClient    : Application version is -1: true
+2026-09-04T00:54:00.891+05:30  INFO 17745 --- [AI-PLANNER-SERVICE] [           main] com.netflix.discovery.DiscoveryClient    : Getting all instance registry info from the eureka server
+2026-09-04T00:54:02.054+05:30  INFO 17745 --- [AI-PLANNER-SERVICE] [           main] com.netflix.discovery.DiscoveryClient    : The response status is 200
+2026-09-04T00:54:02.064+05:30  INFO 17745 --- [AI-PLANNER-SERVICE] [           main] com.netflix.discovery.DiscoveryClient    : Starting heartbeat executor: renew interval is: 30
+2026-09-04T00:54:02.069+05:30  INFO 17745 --- [AI-PLANNER-SERVICE] [           main] c.n.discovery.InstanceInfoReplicator     : InstanceInfoReplicator onDemand update allowed rate per min is 4
+2026-09-04T00:54:02.075+05:30  INFO 17745 --- [AI-PLANNER-SERVICE] [           main] com.netflix.discovery.DiscoveryClient    : Discovery Client initialized at timestamp 1788463442070 with initial instances count: 4
+2026-09-04T00:54:02.080+05:30  INFO 17745 --- [AI-PLANNER-SERVICE] [           main] o.s.c.n.e.s.EurekaServiceRegistry        : Registering application AI-PLANNER-SERVICE with eureka with status UP
+2026-09-04T00:54:02.084+05:30  INFO 17745 --- [AI-PLANNER-SERVICE] [           main] com.netflix.discovery.DiscoveryClient    : Saw local status change event StatusChangeEvent [timestamp=1788463442084, current=UP, previous=STARTING]
+2026-09-04T00:54:02.086+05:30  INFO 17745 --- [AI-PLANNER-SERVICE] [foReplicator-%d] com.netflix.discovery.DiscoveryClient    : DiscoveryClient_AI-PLANNER-SERVICE/192.168.68.104:AI-PLANNER-SERVICE:8084: registering service...
+2026-09-04T00:54:02.107+05:30  INFO 17745 --- [AI-PLANNER-SERVICE] [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8084 (http) with context path '/'
+2026-09-04T00:54:02.109+05:30  INFO 17745 --- [AI-PLANNER-SERVICE] [           main] .s.c.n.e.s.EurekaAutoServiceRegistration : Updating port to 8084
+2026-09-04T00:54:02.143+05:30  INFO 17745 --- [AI-PLANNER-SERVICE] [           main] c.t.ai.AiPlannerServiceApplication       : Started AiPlannerServiceApplication in 6.374 seconds (process running for 7.212)
+2026-09-04T00:54:02.176+05:30  INFO 17745 --- [AI-PLANNER-SERVICE] [foReplicator-%d] com.netflix.discovery.DiscoveryClient    : DiscoveryClient_AI-PLANNER-SERVICE/192.168.68.104:AI-PLANNER-SERVICE:8084 - registration status: 204
+2026-09-04T00:58:02.177+05:30  INFO 17745 --- [AI-PLANNER-SERVICE] [beatExecutor-%d] com.netflix.discovery.DiscoveryClient    : DiscoveryClient_AI-PLANNER-SERVICE/192.168.68.104:AI-PLANNER-SERVICE:8084 - Re-registering apps/AI-PLANNER-SERVICE
+2026-09-04T00:58:02.177+05:30  INFO 17745 --- [AI-PLANNER-SERVICE] [beatExecutor-%d] com.netflix.discovery.DiscoveryClient    : DiscoveryClient_AI-PLANNER-SERVICE/192.168.68.104:AI-PLANNER-SERVICE:8084: registering service...
+2026-09-04T00:58:02.184+05:30  INFO 17745 --- [AI-PLANNER-SERVICE] [beatExecutor-%d] com.netflix.discovery.DiscoveryClient    : DiscoveryClient_AI-PLANNER-SERVICE/192.168.68.104:AI-PLANNER-SERVICE:8084 - registration status: 204
+2026-09-04T00:58:13.931+05:30  INFO 17745 --- [AI-PLANNER-SERVICE] [nio-8084-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-09-04T00:58:13.931+05:30  INFO 17745 --- [AI-PLANNER-SERVICE] [nio-8084-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2026-09-04T00:58:13.933+05:30  INFO 17745 --- [AI-PLANNER-SERVICE] [nio-8084-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 2 ms
+2026-09-04T00:59:00.902+05:30  INFO 17745 --- [AI-PLANNER-SERVICE] [rap-executor-%d] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
+2026-09-04T00:59:49.985+05:30  INFO 17745 --- [AI-PLANNER-SERVICE] [ionShutdownHook] o.s.c.n.e.s.EurekaServiceRegistry        : Unregistering application AI-PLANNER-SERVICE with eureka with status DOWN
+2026-09-04T00:59:49.986+05:30  INFO 17745 --- [AI-PLANNER-SERVICE] [ionShutdownHook] com.netflix.discovery.DiscoveryClient    : Saw local status change event StatusChangeEvent [timestamp=1788463789986, current=DOWN, previous=UP]
+2026-09-04T00:59:49.986+05:30  INFO 17745 --- [AI-PLANNER-SERVICE] [foReplicator-%d] com.netflix.discovery.DiscoveryClient    : DiscoveryClient_AI-PLANNER-SERVICE/192.168.68.104:AI-PLANNER-SERVICE:8084: registering service...
+2026-09-04T00:59:50.002+05:30  INFO 17745 --- [AI-PLANNER-SERVICE] [foReplicator-%d] com.netflix.discovery.DiscoveryClient    : DiscoveryClient_AI-PLANNER-SERVICE/192.168.68.104:AI-PLANNER-SERVICE:8084 - registration status: 204
+2026-09-04T00:59:50.006+05:30  INFO 17745 --- [AI-PLANNER-SERVICE] [ionShutdownHook] com.netflix.discovery.DiscoveryClient    : Shutting down DiscoveryClient ...
+2026-09-04T00:59:53.010+05:30  INFO 17745 --- [AI-PLANNER-SERVICE] [ionShutdownHook] com.netflix.discovery.DiscoveryClient    : Unregistering ...
+2026-09-04T00:59:53.017+05:30  INFO 17745 --- [AI-PLANNER-SERVICE] [ionShutdownHook] com.netflix.discovery.DiscoveryClient    : DiscoveryClient_AI-PLANNER-SERVICE/192.168.68.104:AI-PLANNER-SERVICE:8084 - deregister  status: 200
+2026-09-04T00:59:53.017+05:30  INFO 17745 --- [AI-PLANNER-SERVICE] [ionShutdownHook] com.netflix.discovery.DiscoveryClient    : Completed shut down of DiscoveryClient
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD FAILURE
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  06:03 min
+[INFO] Finished at: 2026-09-04T00:59:53+05:30
+[INFO] ------------------------------------------------------------------------
+[ERROR] Failed to execute goal org.springframework.boot:spring-boot-maven-plugin:3.3.0:run (default-cli) on project ai-planner-service: Process terminated with exit code: 143 -> [Help 1]
+[ERROR] 
+[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
+[ERROR] Re-run Maven using the -X switch to enable full debug logging.
+[ERROR] 
+[ERROR] For more information about the errors and possible solutions, please read the following articles:
+[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoExecutionException

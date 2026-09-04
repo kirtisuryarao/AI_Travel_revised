@@ -5,6 +5,12 @@ import { jsPDF } from 'jspdf';
 import { apiFetch, getToken } from '../lib/api';
 
 const INTERESTS = ['History', 'Food', 'Adventure', 'Nature', 'Culture', 'Relaxation', 'Nightlife', 'Shopping'];
+const HOTEL_BUDGETS = [
+  { label: 'Budget', value: '3000' },
+  { label: 'Comfort', value: '6000' },
+  { label: 'Premium', value: '12000' },
+  { label: 'All stays', value: '25000' }
+];
 const FACTS = [
   'France is the most visited country in the world.',
   'Goa has a coastline of more than 100 kilometres.',
@@ -40,7 +46,7 @@ export default function Planner() {
   const [endDate, setEndDate] = useState('');
   const [travelers, setTravelers] = useState(2);
   const [maxTotalBudget, setMaxTotalBudget] = useState('50000');
-  const [maxHotelBudgetPerNight, setMaxHotelBudgetPerNight] = useState('5000');
+  const [maxHotelBudgetPerNight, setMaxHotelBudgetPerNight] = useState('25000');
   const [selectedInterests, setSelectedInterests] = useState(['Food', 'Nature']);
   const [customInterest, setCustomInterest] = useState('');
   const [error, setError] = useState('');
@@ -259,6 +265,22 @@ export default function Planner() {
         y += wrapped.length * 6 + 2;
       });
     });
+    if (itinerary.packingSuggestions?.length || itinerary.travelTips?.length) {
+      doc.addPage();
+      y = 20;
+      if (itinerary.packingSuggestions?.length) {
+        doc.text('Packing suggestions', 14, y);
+        y += 9;
+        const packing = doc.splitTextToSize(itinerary.packingSuggestions.join(' • '), 180);
+        doc.text(packing, 14, y);
+        y += packing.length * 6 + 10;
+      }
+      if (itinerary.travelTips?.length) {
+        doc.text('Travel tips', 14, y);
+        y += 9;
+        doc.text(doc.splitTextToSize(itinerary.travelTips.join(' • '), 180), 14, y);
+      }
+    }
     doc.save(`travelai-${itinerary.tripSummary.destination}.pdf`);
   }
 
@@ -344,6 +366,18 @@ export default function Planner() {
                 <div className="form-group">
                   <label htmlFor="hotelBudget">Maximum Hotel Budget Per Night (₹)</label>
                   <input id="hotelBudget" type="number" min="1" value={maxHotelBudgetPerNight} onChange={(e) => setMaxHotelBudgetPerNight(e.target.value)} required />
+                  <div className="budget-presets" aria-label="Hotel budget types">
+                    {HOTEL_BUDGETS.map((budget) => (
+                      <button
+                        type="button"
+                        key={budget.label}
+                        className={`budget-preset ${Number(maxHotelBudgetPerNight) === Number(budget.value) ? 'active' : ''}`}
+                        onClick={() => setMaxHotelBudgetPerNight(budget.value)}
+                      >
+                        {budget.label}
+                      </button>
+                    ))}
+                  </div>
                 </div>
               </div>
 
@@ -404,11 +438,33 @@ export default function Planner() {
           {!loading && step === 3 && (
             <div className="option-grid">
               <button type="button" className="back-button" onClick={() => setStep(2)}>← Choose another flight</button>
-              {hotels.length === 0 && <p>No hotels are at or under ₹{maxHotelBudgetPerNight} per night for this destination.</p>}
+              {hotels.length === 0 && (
+                <div className="empty-results" role="status">
+                  <div className="empty-results-icon" aria-hidden="true">⌂</div>
+                  <h3>No stays match this search</h3>
+                  <p>No hotels were found at or under ₹{Number(maxHotelBudgetPerNight).toLocaleString('en-IN')} per night for {destination.toUpperCase()}.</p>
+                  <div className="empty-results-actions">
+                    <button
+                      type="button"
+                      className="plan-button"
+                      onClick={() => {
+                        setMaxHotelBudgetPerNight((current) => String(Math.max(Number(current) * 2, 10000)));
+                        setStep(1);
+                      }}
+                    >
+                      Increase hotel budget
+                    </button>
+                    <button type="button" className="back-button" onClick={() => setStep(1)}>Edit trip details</button>
+                  </div>
+                </div>
+              )}
               {hotels.map((hotel) => (
                 <article key={hotel.hotelId} className="option-card">
                   {hotel.imageUrl && <img src={hotel.imageUrl} alt={hotel.name} />}
-                  <h3>{hotel.name}</h3>
+                  <div className="hotel-card-heading">
+                    <h3>{hotel.name}</h3>
+                    <span className="hotel-tier">{Number(hotel.pricePerNight) <= 3000 ? 'Budget' : Number(hotel.pricePerNight) <= 6000 ? 'Comfort' : Number(hotel.pricePerNight) <= 12000 ? 'Premium' : 'Luxury'}</span>
+                  </div>
                   <div className="option-meta">
                     <span>★ {hotel.rating}</span>
                     <span>{hotel.location}</span>

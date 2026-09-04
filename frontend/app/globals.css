@@ -22,6 +22,37 @@
   display: grid;
   gap: 1rem;
 }
+.empty-results {
+  border: 1.5px dashed var(--stroke);
+  background: var(--amber-mist);
+  border-radius: 18px;
+  padding: 2rem 1.25rem;
+  text-align: center;
+}
+.empty-results-icon {
+  color: var(--amber-deep);
+  font-size: 2rem;
+  line-height: 1;
+  margin-bottom: 0.7rem;
+}
+.empty-results h3 {
+  font-family: 'Syne', sans-serif;
+  font-size: 1.2rem;
+  margin-bottom: 0.4rem;
+}
+.empty-results p {
+  color: var(--text-secondary);
+  max-width: 34rem;
+  margin: 0 auto;
+}
+.empty-results-actions {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.7rem;
+  flex-wrap: wrap;
+  margin-top: 1.25rem;
+}
 .option-card {
   border: 1.5px solid var(--stroke);
   background: var(--surface);
@@ -33,6 +64,43 @@
 .option-card h3 {
   font-family: 'Syne', sans-serif;
   font-size: 1.1rem;
+}
+.budget-presets {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .4rem;
+  margin-top: .55rem;
+}
+.budget-preset {
+  border: 1px solid var(--stroke);
+  border-radius: 999px;
+  padding: .3rem .65rem;
+  background: var(--surface);
+  color: var(--text-secondary);
+  cursor: pointer;
+  font: inherit;
+  font-size: .78rem;
+}
+.budget-preset.active,
+.budget-preset:hover {
+  border-color: var(--amber);
+  color: var(--amber-deep);
+  background: var(--amber-mist);
+}
+.hotel-card-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: .75rem;
+}
+.hotel-tier {
+  color: var(--amber-deep);
+  background: var(--amber-mist);
+  border-radius: 999px;
+  padding: .2rem .55rem;
+  font-size: .72rem;
+  font-weight: 700;
+  white-space: nowrap;
 }
 .option-meta {
   display: flex;
